@@ -1,0 +1,31 @@
+[
+    {
+        "label": "Sun",
+        "earning": 5000
+    },
+    {
+        "label": "Mon",
+        "earning": 50000
+    },
+    {
+        "label": "Tue",
+        "earning": 10000
+    },
+    {
+        "label": "Wed",
+        "earning": 5600
+    },
+    {
+        "label": "Thu",
+        "earning": 9500
+    },
+    {
+        "label": "Fri",
+        "earning": 24100
+    },
+    {
+        "label": "Sat",
+        "earning": 6540
+    }
+    
+]
