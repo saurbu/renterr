@@ -104,7 +104,7 @@ export const verifyOTP = async (req, res) =>{
         res.status(200).json({
             success: true,
             newUser: false,
-            isProfileComplete: user.isProfileComplete,
+            isProfileCompleted: user.isProfileCompleted,
             token,
             user
         })

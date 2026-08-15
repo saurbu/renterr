@@ -82,11 +82,11 @@ const Signup = () => {
       formData.append("idNumber", verificationInfo.idNumber);
 
       if (verificationInfo.profileImage) {
-        formData.append("profileImage", verificationInfo.profileImage);
+        formData.append("profileImage", verificationInfo.profileImage)
       }
 
       if (verificationInfo.document) {
-        formData.append("idProofImage", verificationInfo.document);
+        formData.append("idProofImage", verificationInfo.document)
       }
 
       const response = await fetch(url, {

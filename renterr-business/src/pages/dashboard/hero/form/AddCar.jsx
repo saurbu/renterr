@@ -49,7 +49,7 @@ const AddCar = ({ onBack }) => {
 
       data.append("brand", formData.brand)
       data.append("model", formData.model)
-      data.append("pricePerDay", formData.pricePerDay)
+      data.append("pricePerDay", formData.pricePerDay) 
       data.append("gearType", formData.gearType)
       data.append("engineType", formData.engineType)
       data.append("seats", formData.seats)

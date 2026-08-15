@@ -52,7 +52,7 @@ export const profileComplete = async (req, res) => {
             message: "Profile created successfully",
             success: true,
             user: {
-                id: user._id,
+                _id: user._id,
                 name: user.name,
                 number: user.number,
                 licenceNumber: user.licenceNumber,
@@ -68,7 +68,7 @@ export const profileComplete = async (req, res) => {
             error: err.message
         });
     }
-};
+}
 
 export const getMe = async (req, res) => {
     return res.status(200).json({

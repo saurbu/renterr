@@ -16,7 +16,7 @@ const Approved = () => {
             }
           }
         )
-        if (res.data.success) {
+        if (res.data.success) { 
         const pending = res.data.bookings.filter((item) => item.status === "approved")
           setBookings(pending)
         }
