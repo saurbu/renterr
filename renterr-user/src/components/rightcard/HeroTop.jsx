@@ -6,10 +6,11 @@ import Image from "/download.jpg";
 import { useNavigate } from 'react-router-dom'
 import Logo from '../../assets/logo.png'
 
-const HeroTop = ({isLogin}) => {
+const HeroTop = ({login,  sideOpen}) => {
   const navigate = useNavigate()
   const [show, setShow] = useState(true)
 
+  const user = JSON.parse(localStorage.getItem('loggedInUser'))
   
   useEffect(() => {
     let lastScroll = 0;
@@ -30,10 +31,15 @@ const HeroTop = ({isLogin}) => {
   }, [])
 
   return (
-    <div className={` fixed md:top-5 left-0 w-full md:left-[330px]  bg-white/90 md:w-[calc(100%-360px)] pl-4 py-3 z-40
-      transition-transform duration-500 ease-in-out 
-    ${show ? "translate-y-0" : "-translate-y-full"
-    }`}>
+    <div
+      className={`fixed top-0 md:top-5
+        ${sideOpen ? "md:left-[330px] md:w-[calc(100%-380px)]" : "md:left-[160px] md:w-[calc(100%-210px)]"}
+        left-0 w-full
+        bg-white/90 pl-4 py-3 z-40
+        transition-all duration-1000 ease-in-out
+        ${show ? "translate-y-0" : "-translate-y-full"}
+      `}
+    >
       <div className="flex gap-5 justify-between items-center py-2">
         <img 
         src={Logo} 
@@ -61,19 +67,12 @@ const HeroTop = ({isLogin}) => {
             <MdOutlineNotifications className="text-gray-600 text-2xl" />
           </div>
           <div className="md:flex hidden leading-4 lg:block">
-            {isLogin ? (
+            {login ? (
               <div className="flex justify-center items-center gap-5 border p-1 px-3 rounded-2xl border-gray-400">
-                <img 
-                src="" 
-                alt="" 
-                className="w-8 h-8 rounded-full object-cover bg-no-repeat border border-gray-400"
-                style={{backgroundImage: `url("https://ik.imagekit.io/kaptaanjii/pngwing.com.png")`,
-                  backgroundPosition: "center"
-                }}
-                />
-                <div className="">
+                
+                <div>
                   <h3 className="font-semibold text-gray-900">
-                  Saurav
+                  {user.name}
                   </h3>
                   <p className="text-sm text-gray-500">
                   User

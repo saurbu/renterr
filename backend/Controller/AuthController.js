@@ -15,10 +15,10 @@ export const signup = async (req, res) => {
       idNumber,
     } = req.body;
 
-    const profileImage = req.files?.profileImage?.[0];
-    const idProofImage = req.files?.idProofImage?.[0];
+    const profileImage = req.files?.profileImage?.[0]
+    const idProofImage = req.files?.idProofImage?.[0]
 
-    const existingUser = await adminModel.findOne({ email });
+    const existingUser = await adminModel.findOne({ email })
 
     if (existingUser) {
       return res.status(409).json({
@@ -120,11 +120,7 @@ export const login = async (req, res) => {
       success: true,
       message: "Login successful",
       jwtToken,
-      user: {
-        _id: user._id,
-        name: user.name,
-        profileImage: user.profileImage,
-      },
+      user
     });
 
   } catch (err) {
@@ -136,3 +132,11 @@ export const login = async (req, res) => {
     });
   }
 }
+
+export const getMe = async (req, res) => {
+    return res.status(200).json({
+        message: "successful",
+        success: true,
+        user: req.user
+    });
+};

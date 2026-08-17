@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, {  } from "react";
 import { ShieldCheck, Headset, LogOut } from "lucide-react";
 import { NavLink, useNavigate  } from "react-router-dom";
 
 const HeroTop = ({ onAddCar , logout, setLogout}) => {
-  const [showWelcome, setShowWelcome] = useState(true);
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowWelcome(false);
-    }, 15000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+  const storedUser = JSON.parse(localStorage.getItem("user") || "null")
 
   const profileImg = storedUser?.profileImage?.data
     ? `data:${storedUser.profileImage.contentType};base64,${storedUser.profileImage.data}`
-    : "https://via.placeholder.com/40";
+    : "https://via.placeholder.com/40"
 
-  const name = storedUser?.name || "User";
+  const name = storedUser?.name || "User"
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInUser")
 
-    navigate("/login", { replace: true });
+    navigate("/login", { replace: true })
   };
   return (
     <div className="bg-white pt-3 left-0">

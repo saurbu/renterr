@@ -9,7 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import earningData from "../../../data/earningData.json";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -20,57 +20,99 @@ ChartJS.register(
   Legend
 );
 
-const HeroChart = () => {
+const HeroChart = ({ earning = [] }) => {
+  const navigate = useNavigate()
+  const labels = earning.map((item) => {
+    const date = new Date(item.date)
+
+    return date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+    })
+  })
+
+  const data = earning.map((item) => item.earning)
+  const today = new Date().toISOString().split("T")[0]
+
+  const todayEarning =
+    earning.find((item) => item.date === today)?.earning || 0
+
   return (
-    <div className="w-full min-w-0 bg-gray-100 rounded-xl p-3 sm:p-4 md:p-5">
-      <div className="flex justify-between items-center">
-      <h2 className="text-base sm:text-lg font-semibold mb-3">
-        Earnings Overview
-      </h2>
-      <p className="bg-green-100 px-3 py-1 border-2 border-green-600 rounded-2xl ">All Time: <span className="text-green-600 font-bold">500000</span></p>
+    <div className="w-full h-fit min-w-0 bg-gray-100 rounded-xl p-3 sm:p-4 md:p-5">
+
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-base sm:text-lg font-semibold">
+          Earnings Overview
+        </h2>
       </div>
 
       <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px]">
+
         <Line
           options={{
             responsive: true,
             maintainAspectRatio: false,
+
             plugins: {
               legend: {
                 display: false,
               },
+
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    return ` ₹${context.raw}`;
+                  },
+                },
+              },
             },
+
             scales: {
               x: {
                 ticks: {
                   maxRotation: 0,
-                  autoSkip: true,
+                  autoSkip: false,
                 },
               },
+
               y: {
                 beginAtZero: true,
+
+                ticks: {
+                  callback: (value) => `₹${value}`,
+                },
               },
             },
           }}
+
           data={{
-            labels: earningData.map((d) => d.label),
+            labels,
+
             datasets: [
               {
                 label: "Earning",
-                data: earningData.map((d) => d.earning),
+                data,
+
                 borderColor: "#3b82f6",
                 backgroundColor: "rgba(59,130,246,0.1)",
+
                 tension: 0.4,
                 fill: true,
-                pointRadius: 3,
+
+                pointRadius: 4,
+                pointHoverRadius: 6,
               },
             ],
           }}
         />
-        <div className="py-3">
-          <p className="text-lg">Today: 5000</p>
-        </div>
       </div>
+         <p className="text-sm w-fit bg-green-100 border-2 text-green-700 px-3 p-1 my-3 rounded-full font-semibold">
+          Today: ₹{todayEarning}
+        </p>
+        <p 
+        onClick={() => navigate("/earning")}
+        className="text-blue-600 cursor-pointer ">View Full Earning details...</p>
+
     </div>
   );
 };

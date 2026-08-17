@@ -17,12 +17,12 @@ const Navbar = () => {
     ]
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
 
-    navigate("/login", { replace: true });
-  };
-
+    navigate("/login", { replace: true })
+  }
+  
   return (
       <div className={`${sideOpen ? "md:w-[280px]" : "md:w-[110px]"} flex flex-col justify-between h-full shrink-0 transition-all duration-700 ease-in-out`}>      
       {sideOpen ? (
@@ -79,7 +79,7 @@ const Navbar = () => {
         </div>
       </div>
     ) : (
-    <div className='bg-indigo-950 border hidden md:flex border-gray-200 md:w-fit shadow-lg justify-between rounded-xl p-5 m-2.5 fixed left-0 top-0 h-screen flex flex-col'>
+    <div className='bg-indigo-950 border hidden md:flex border-gray-200 md:w-fit shadow-lg justify-between rounded-xl p-5 m-2.5 fixed left-0 top-0 h-screen flex-col'>
         <nav>
           <div
             onMouseEnter={() => {

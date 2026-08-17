@@ -19,6 +19,16 @@ const Login = () => {
     })
   const navigate = useNavigate()
 
+  const term = [
+    {index: 1, main: "Correct Information", desc: "Please provide your real name, phone number, email, and valid driving licence details."},
+    {index: 2, main: "Driving Licence", desc: "Your driving licence is collected only for identity and rental verification. It may be shared with the relevant car owner for verification. It will not be publicly displayed or shared for unrelated purposes."},
+    {index: 3, main: "Booking & Vehicle Use", desc: "Use the rented car responsibly and follow all traffic and local laws. You are responsible for any damage, fines, or violations caused by you."},
+    {index: 4, main: "Personal Information", desc: "Do not misuse, copy, save, or share another user's personal information or documents."},
+    {index: 5, main: "Account Security", desc: "Keep your account information safe and do not use another person's account."},
+    {index: 6, main: "Cancellation & Refunds", desc: "Cancellation and refund rules may depend on the booking and car owner's policy."},
+    {index: 7, main: "Agreement", desc: "By continuing to use Renterr, you confirm that the information you provide is correct and agree to these Terms & Conditions."},
+  ]
+
   const handleSendOtp = async (e) => {
     e.preventDefault()
 
@@ -150,13 +160,13 @@ const Login = () => {
                 />
                 {!otpsend ? (
                   <button 
-                  className='flex bg-blue-600 w-full p-2 rounded-xl cursor-pointer font-semibold gap-1 text-white justify-center items-center'
+                  className='flex bg-blue-600 hover:bg-blue-700 w-full p-2 rounded-xl cursor-pointer font-semibold gap-1 text-white justify-center items-center'
                   ><Send size={22}/>Send OTP</button>
                 ):(
                   <button 
                   disabled
                   className='flex bg-green-600 w-full p-2 rounded-xl cursor-pointer font-semibold gap-1 text-white justify-center items-center'
-                  ><Send size={22}/>OTP sended</button>
+                  ><Send size={22}/>OTP Sent</button>
                 )}
                   <p className='text-center py-3 hidden md:block'>---------------- OR ----------------</p>
               </form>
@@ -213,7 +223,7 @@ const Login = () => {
                     <button 
                     type='button'
                     onClick={handleResendOtp}
-                    className='text-blue-700'>Resend OTP</button>
+                    className='text-blue-600'>Resend OTP</button>
                     )}
                   </div> 
                 )}
@@ -221,18 +231,66 @@ const Login = () => {
                   <input type="checkbox" 
                   className='w-3'
                   required/>
-                  <span>Are you agree with our <a href="" className='text-blue-600 font-semibold'>Term & Condition</a></span>
+                  <span>Our <button
+                  onClick={()=> setStep("terms")}
+                  className='text-blue-600 font-semibold cursor-pointer'>Term & Condition</button></span>
                 </div>
-                <button className='bg-blue-600 w-full p-2 rounded-xl cursor-pointer font-semibold text-white'>Verify OTP</button>
+                <button className='bg-blue-600  hover:bg-blue-700 w-full p-2 rounded-xl cursor-pointer font-semibold text-white'>Verify OTP</button>
               </form>
+            </div>
+          </div>
+        ) : step === "terms" ? (
+          <div className="md:w-[30%] md:m-15 m-5 w-full flex flex-col justify-center items-center">
+            <img src="https://ik.imagekit.io/flmrntctj/logo2.png" alt="Renterr" className='w-30 md:hidden top-5 absolute'/>
+            <div className="w-full max-h-[85vh] bg-white/90 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.8)] p-5 flex flex-col">
+              <div className="pb-2">
+                <h1 className="font-bold text-indigo-950 md:text-2xl text-lg">
+                  Renterr — Terms & Conditions
+                </h1>
+                <p className="text-gray-600 mt-1">
+                  By using Renterr, you agree to the following:
+                </p>
+              </div>
+              <div className="overflow-y-auto max-h-[400px] pr-2 mt-4 scrollbar-none">
+                <div className="flex flex-col gap-4">
+
+                  {term.map((val) => (
+                    <div key={val.index}>
+                      <h2 className="text-lg font-semibold text-indigo-950">
+                        <span className="text-blue-600">{val.index}.</span>{" "}
+                        {val.main}
+                      </h2>
+
+                      <p className="text-gray-600 text-sm leading-relaxed pl-5">
+                        {val.desc}
+                      </p>
+                    </div>
+                  ))}
+                  <div className=" flex flex-col justify-center items-center">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  By continuing, you confirm that you have read and agree to
+                  Renterr's Terms & Conditions.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStep("login")}
+                  className="w-fit mt-4 px-4 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl font-semibold cursor-pointer transition"
+                >
+                  OK, I Understand
+                </button>
+              </div>
+                </div>
+              </div>
             </div>
           </div>
         ) : (
           <div className='md:w-[30%] md:m-15 m-5 w-full flex flex-col justify-center items-center'>
+            <img src="https://ik.imagekit.io/flmrntctj/logo2.png" alt="Renterr" className='w-30 md:hidden top-5 absolute'/>
             <Complete />
           </div>
         )}
       </div>
+      
     </div>
   )
 }

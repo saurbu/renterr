@@ -63,7 +63,7 @@ const MyCars = () => {
   }
 
   return (
-    <div className="p-6  ">
+    <div className="p-6  mb-5">
       <h1 className="text-3xl font-bold mb-6">
         My Cars
       </h1>
@@ -72,6 +72,7 @@ const MyCars = () => {
       className="grid md:grid-cols-3 lg:grid-cols-3 grid-cols-2 gap-6 overflow-x-auto scrollbar-none">
         {cars.map((car) => (
           <div
+          key={cars._id}
             className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:-translate-y-1 transition-all duration-300">
             <img
               loading='lazy'

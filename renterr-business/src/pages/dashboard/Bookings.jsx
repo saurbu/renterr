@@ -18,7 +18,7 @@ const Bookings = () => {
         Booking Management
       </h1>
 
-      <div className="flex md:gap-8 gap-3 mt-6 border-b">
+      <div className="flex md:gap-8 gap-3 mt-6  border-b">
         {tabs.map((tab) => (
           <NavLink
             key={tab.name}
@@ -26,8 +26,8 @@ const Bookings = () => {
             onClick={() => setActiveTab(tab.name)}
             className={`pb-3 font-medium cursor-pointer ${
               activeTab === tab.name
-                ? "border-b-2 border-red-500 text-red-500"
-                : "text-gray-500"
+                ? "border-b-2  border-red-500 text-red-500"
+                : "text-gray-500 text-sm md:text-lg"
             }`}
           >
             {tab.name}

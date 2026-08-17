@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -16,8 +16,62 @@ import Pending from "./pages/dashboard/hero/booking/pending";
 import Completed from "./pages/dashboard/hero/booking/completed";
 import Cancel from "./pages/dashboard/hero/booking/cancel";
 import Approved from "./pages/dashboard/hero/booking/Approved";
+import axios from "axios";
 
 const App = () => {
+  const [bookings, setBookings] = useState([])
+  const [earning, setEarning] = useState([])
+  const [totalErn, setTotalErn] = useState(0)
+  
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const token = localStorage.getItem("token")
+
+        const res = await axios.get(
+          "http://localhost:8000/api/car/bookings",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+
+        if (!res.data.success) return
+        const completed = res.data.bookings.filter(
+          booking => booking.status === "completed"
+        )
+
+        setBookings(completed)
+        const earningByDate = completed.reduce((acc, booking) => {
+          const date = new Date(booking.updatedAt)
+            .toISOString()
+            .split("T")[0]
+
+          acc[date] = (acc[date] || 0) + Number(booking.totalAmount || 0)
+
+          return acc
+        }, {})
+        const earningList = Object.entries(earningByDate)
+          .map(([date, earning]) => ({
+            date,
+            earning
+          }))
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+
+        setEarning(earningList)
+        const total = completed.reduce(
+          (sum, booking) => sum + Number(booking.totalAmount || 0),
+          0
+        )
+        setTotalErn(total)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchBookings()
+  }, [])
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" />} />
@@ -26,8 +80,8 @@ const App = () => {
       <Route path="/signup" element={<Signup />} />
 
       {/* Dashboard Layout */}
-      <Route path="/" element={<DashboardLayout />}>
-        <Route path="home" element={<Home />} />
+      <Route path="/" element={<DashboardLayout earning={earning} bookings={bookings}/>}>
+        <Route path="home" element={<Home earning={earning} totalErn={totalErn}/>} />
         <Route path="my-cars" element={<MyCars />} />
         <Route path="bookings" element={<Bookings />} >
           <Route index element={<All />} />
@@ -37,7 +91,7 @@ const App = () => {
           <Route path="cancelled" element={<Cancel />} />
       
         </Route>
-        <Route path="earning" element={<Earning />} />
+        <Route path="earning" element={<Earning earning={earning} totalErn={totalErn} bookings={bookings}/>} />
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>

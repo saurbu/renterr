@@ -2,10 +2,11 @@ import React from 'react'
 import Hero from '../components/rightcard/Hero'
 import Navbar from '../components/leftcard/Navbar'
 
-const Home = ({isLogin,setIsLogin}) => {
+const Home = ({login,setlogin,  sideOpen, setSideOpen}) => {
+  
   return (
     <div className='w-full md:py-3'>
-      <Hero login={isLogin} setlogin={setIsLogin}/>
+      <Hero login={login} setlogin={setlogin} sideOpen={sideOpen} setSideOpen={setSideOpen}/>
 
     </div>
   )

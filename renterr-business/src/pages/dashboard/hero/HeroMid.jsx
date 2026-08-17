@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { CarFront, BookCheck, IndianRupee, Clock3 } from "lucide-react";
 import axios from "axios";
 
-const HeroMid = () => {
+const HeroMid = ({totalErn}) => {
   const [cars, setCars] = useState([]);
-  const [bookings, setBookings] = useState([]);
-  const [pending, setPending] = useState([]);
+  const [bookings, setBookings] = useState([])
+  const [pending, setPending] = useState([])
 
+    
 
     const getCars = async () => {
       try {
@@ -57,6 +58,7 @@ const HeroMid = () => {
   }, [])
 
 
+
   const stats = [
     {
       title: "Total Cars",
@@ -70,7 +72,7 @@ const HeroMid = () => {
     },
     {
       title: "Total Earning",
-      value: "₹2",
+      value: totalErn,
       icon: IndianRupee,
     },
     {
@@ -96,7 +98,7 @@ const HeroMid = () => {
                 </h1>
               </div>
 
-              <h1 className="mt-2 px-1 sm:px-2 text-3xl sm:text-4xl md:text-5xl font-semibold truncate">
+              <h1 className="mt-2 px-1 sm:px-2 sm:text-4xl max-text-5xl font-semibold truncate">
                 {stat.value}
               </h1>
             </div>

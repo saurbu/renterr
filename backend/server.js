@@ -9,6 +9,8 @@ import AuthRouter from "./Routes/AuthRouter.js";
 import carRoutes from "./Routes/carRoutes.js";
 import authRouter from './Routes/authRouter.js'
 import userRouter from './Routes/userRouter.js'
+import cron from "node-cron"
+import { endBooking } from "./Controller/BookingController.js";
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -21,9 +23,17 @@ app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
 
 const startServer = async () => {
+
   try {
     await connectDb();
-
+    cron.schedule("0 0 * * *", async () => {
+      try{
+        await endBooking()
+      }catch(err){
+        console.log("Error checking expired bookings:", err);
+        
+      }
+    })
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
@@ -34,3 +44,4 @@ const startServer = async () => {
 };
 
 startServer()
+

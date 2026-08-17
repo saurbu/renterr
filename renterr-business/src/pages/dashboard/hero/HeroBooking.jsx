@@ -37,7 +37,7 @@ const HeroBooking = () => {
 
       <div className="space-y-2">
         {bookings.map((booking) => (
-          <div key={booking.id} className="w-full flex items-center gap-2 sm:gap-3 p-2 border border-gray-200 bg-white rounded-xl overflow-hidden">
+          <div key={booking._id} className="w-full flex items-center gap-2 sm:gap-3 p-2 border border-gray-200 hover:-translate-x-1 transition-all duration-300 bg-white rounded-xl overflow-hidden">
             <img src={booking.car?.images?.[0]} alt="car" className="md:w-35 md:h-20 w-20 h-16 rounded-lg object-cover shrink-0" />
 
             <div className="flex-1 min-w-0">
@@ -56,7 +56,7 @@ const HeroBooking = () => {
 
             <div className="shrink-0">
               <span className={`inline-flex justify-center items-center px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-medium ${
-                booking.status === "approved" || booking.status === "accepted"
+                booking.status === "approved" || booking.status === "completed"
                   ? "bg-green-100 text-green-700"
                   : booking.status === "cancelled" || booking.status === "rejected"
                   ? "bg-red-100 text-red-700"

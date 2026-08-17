@@ -76,6 +76,77 @@ export const booking = async (req, res) =>{
     }
 }
 
+export const status = async (req, res) =>{
+    try{
+        const { bookingId } = req.params
+        const { status} = req.body
+
+
+         if (!status || !bookingId) {
+            return res.status(400).json({
+                message: "all feilds are required",
+                success: false
+            });
+        }
+        const validStatuses = [
+            "pending",
+            "accepted",
+            "rejected",
+            "cancelled",
+            "completed"
+        ]
+
+        if(!validStatuses.includes(status)){
+            return res.status(400).json({
+                message: "status not found",
+                success: false
+            })
+        }
+        const booking = await Booking.findById(bookingId)
+
+        if (!booking) {
+            return res.status(400).json({
+                message: "booking not found",
+                success: false
+            });
+        }
+        booking.status = status
+        await booking.save()
+        
+        res.status(200).json({
+            message: "status changed successfully",
+            success: true,
+            booking
+        })
+    }catch(err){
+        res.status(500).json({
+            message: "status change failed" ,
+            success: false,
+            error: err.message
+        })
+    }
+}
+
+export const endBooking = async () => {
+    const bookings = await Booking.find({status: "accepted"})
+
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    for(const booking of bookings){
+        const end = new Date(booking.date)
+
+        end.setDate(
+            end.getDate() + booking.days
+        )
+        end.setHours(0, 0, 0, 0)
+        if(today > end){
+            booking.status = "completed"
+            await booking.save()
+        }
+    }
+}
+
 export const cancel = async (req, res) =>{
     try{
         const {

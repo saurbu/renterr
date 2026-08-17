@@ -14,7 +14,7 @@ router.put(
     profileComplete
 );
 router.get('/me', getMe)
-router.post('/bookcar',protect, booking) 
+router.post('/bookcar',protect, booking)  
 router.patch('/bookcar/:bookingId/cancel',protect, cancel) 
 
 export default router 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Hero from "./hero/Hero";
 import AddCarForm from "./hero/form/AddCar";
 
-const Home = () => {
+const Home = ({earning, totalErn}) => {
   const [user, setUser] = useState(null);
   const [showAddCar, setShowAddCar] = useState(false);
 
@@ -39,6 +39,8 @@ const Home = () => {
           <AddCarForm onBack={() => setShowAddCar(false)} />
         ) : (
           <Hero
+          earning={earning}
+          totalErn={totalErn}
             user={user}
             onAddCar={() => setShowAddCar(true)}
           />

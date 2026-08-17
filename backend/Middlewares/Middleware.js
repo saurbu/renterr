@@ -3,9 +3,7 @@ import jwt from "jsonwebtoken"
 
 const protect = async (req, res, next) => {
     try {
-
         const authHeader = req.headers.authorization
-
         console.log("AUTH HEADER:", authHeader)
 
         if (!authHeader) {
@@ -14,13 +12,11 @@ const protect = async (req, res, next) => {
                 message: "Authorization header missing"
             })
         }
-
         const token = authHeader.split(" ")[1]
         const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET
         )
-
         const user = await User.findById(decoded.userId || decoded._id)
 
         if (!user) {
@@ -29,11 +25,8 @@ const protect = async (req, res, next) => {
                 message: "User not found"
             })
         }
-
         req.user = user
-
         next()
-
     } catch (err) {
         return res.status(401).json({
             success: false,

@@ -1,9 +1,10 @@
 import React,{ useEffect, useState} from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const HeroMain = () => {
   const [cars, setCars] = useState([])
-
+  const navigate = useNavigate()
   useEffect(() =>{
     const fetchCars = async () =>{
       try{
@@ -24,9 +25,14 @@ const HeroMain = () => {
   return (
     <div className="p-6">
       <div 
-      className="grid md:grid-cols-3 lg:grid-cols-3 grid-cols-2 mt-15 gap-6 overflow-x-auto scrollbar-none">
+      
+      className="grid md:grid-cols-3 mb-8 lg:grid-cols-3 grid-cols-2 mt-15 md:mb-1 gap-6 overflow-x-auto scrollbar-none">
         {cars.map((car) => (
           <div
+          onClick={() => 
+            
+          navigate("/bookcar")}
+          key={car._id}
             className="bg-white rounded-2xl border justify-between flex flex-col  border-gray-200 overflow-hidden hover:-translate-y-1 transition-all duration-300">
             <img
               loading='lazy'
@@ -59,6 +65,7 @@ const HeroMain = () => {
               </div>
             </div>
                 <button 
+                
                 className="px-4 py-2  bg-indigo-950 cursor-pointer text-white  hover:bg-indigo-900">
                   Book Now
                 </button>
@@ -71,33 +78,6 @@ const HeroMain = () => {
           No Cars Added Yet
         </div>
       )}
-
-      {/* {deleteCars && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
-          <div className="w-full max-w-md rounded-2xl bg-white  border border-gray-200 p-6 sm:p-8 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Remove Car?
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-gray-500">
-              Are you sure you want to remove this car?
-            </p>
-            <div className="mt-7 flex flex-col-reverse sm:flex-row gap-3 justify-center">
-              <button
-                onClick={() => setDeleteCars(null)}
-                className="w-full sm:w-auto cursor-pointer rounded-lg border border-gray-300 bg-white px-6 py-2.5 font-semibold text-gray-700 transition hover:bg-gray-100"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={removeCar}
-                className="w-full sm:w-auto cursor-pointer rounded-lg bg-red-500 px-6 py-2.5 font-semibold text-white transition hover:bg-red-600 active:scale-95"
-              >
-                Yes, Remove
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
     </div>
   )
 }

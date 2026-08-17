@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import { Plus, X, ArrowLeft } from "lucide-react";
+import React, { useRef, useState } from "react"
+import { Plus, X, ArrowLeft } from "lucide-react"
+import state from "../../../../data/state.json"
 
 const AddCar = ({ onBack }) => {
   const [images, setImages] = useState([]);
@@ -189,24 +190,40 @@ const AddCar = ({ onBack }) => {
             className="border p-3 rounded-lg"
             required
           />
-          <input
-            type="text"
+          <select
             name="state"
             value={formData.state}
             onChange={handleChange}
-            placeholder="Enter State"
             className="border p-3 rounded-lg"
             required
-          />
-          <input
-            type="text"
+          >
+            <option value="">Select State</option>
+
+            {state.states.map((item, index) => (
+              <option key={index} value={item.state}>
+                {item.state}
+              </option>
+            ))}
+          </select>
+
+          <select
             name="district"
-            value={formData.District}
+            value={formData.district}
             onChange={handleChange}
-            placeholder="Enter District"
             className="border p-3 rounded-lg"
             required
-          />
+            disabled={!formData.state}
+          >
+            <option value="">Select District</option>
+
+            {state.states
+              .find((item) => item.state === formData.state)
+              ?.district.map((district, index) => (
+                <option key={index} value={district}>
+                  {district}
+                </option>
+              ))}
+          </select>
         </div>
 
         <div className="mt-8">
@@ -214,7 +231,7 @@ const AddCar = ({ onBack }) => {
             Car Images ({images.length}/5)
           </h3>
 
-          <div className="flex gap-6">
+          <div className="flex gap-6 ">
             <div className="flex flex-wrap gap-3 w-[70%] min-h-[140px] p-3">
               {images.length === 0 ? (
                 <div className="text-gray-400 flex items-center">
@@ -229,7 +246,7 @@ const AddCar = ({ onBack }) => {
                     <img
                       src={img.preview}
                       alt=""
-                      className="w-24 h-24 rounded-lg object-cover "
+                      className="md:w-24 md:h-24 w-11 h-11 rounded-lg object-cover "
                     />
 
                     <button
@@ -266,7 +283,7 @@ const AddCar = ({ onBack }) => {
               >
                 <Plus size={28} />
                 <span>Add Images</span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs hidden md:block text-gray-500">
                   Maximum 5 Images
                 </span>
               </button>

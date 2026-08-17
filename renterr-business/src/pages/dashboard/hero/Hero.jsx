@@ -4,7 +4,7 @@ import HeroMid from "./HeroMid";
 import HeroChart from "./HeroChart";
 import HeroBooking from "./HeroBooking";
 
-const Hero = ({ user, onAddCar }) => {
+const Hero = ({ user, onAddCar, earning, totalErn }) => {
     const [logout, setLogout] = useState(false)
 
   return (
@@ -18,12 +18,12 @@ const Hero = ({ user, onAddCar }) => {
         setLogout={setLogout}
       />
 
-      <HeroMid />
+      <HeroMid totalErn={totalErn}/>
 
       <div 
       onClick={()=> setLogout(false)}
       className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 px-3 sm:px-4 md:px-6 pb-6 md:pr-10">
-        <HeroChart />
+        <HeroChart earning={earning}/>
         <HeroBooking />
       </div>
 
