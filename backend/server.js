@@ -7,7 +7,6 @@ import cors from "cors";
 import connectDb from "./config/db.js";
 import AuthRouter from "./Routes/AuthRouter.js";
 import carRoutes from "./Routes/carRoutes.js";
-import authRouter from './Routes/authRouter.js'
 import userRouter from './Routes/userRouter.js'
 import cron from "node-cron"
 import { endBooking } from "./Controller/BookingController.js";
