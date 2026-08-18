@@ -1,7 +1,7 @@
 import express from "express";
 
-import upload from "../middlewares/upload.js";
-import authMiddleware from "../middlewares/AuthMiddleware.js";
+import upload from "../Middlewares/upload.js";
+import authMiddleware from "../Middlewares/AuthMiddleware.js";
 import { signupValidation, loginValidation,} from "../Middlewares/validation.js";
 import { signup, login, } from "../Controller/AuthController.js";
 import { sendOtp, verifyOTP } from "../Controller/UserAuthController.js";
