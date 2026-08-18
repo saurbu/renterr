@@ -38,7 +38,6 @@ export const profileComplete = async (req, res) => {
             folder: "/renterr/licences",
         })
 
-
         user.name = name;
         user.number = number;
         user.licenceNumber = licenceNumber;

@@ -101,6 +101,7 @@ export const mycar = async (req, res) =>{
 
     }
 }
+
 export const allcars = async (req, res) =>{
     try{
         const cars = await Car.find().sort({createdAt: -1})

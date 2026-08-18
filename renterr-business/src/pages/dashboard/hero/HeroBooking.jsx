@@ -56,7 +56,7 @@ const HeroBooking = () => {
 
             <div className="shrink-0">
               <span className={`inline-flex justify-center items-center px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs md:text-sm font-medium ${
-                booking.status === "approved" || booking.status === "completed"
+                booking.status === "accepted" || booking.status === "completed"
                   ? "bg-green-100 text-green-700"
                   : booking.status === "cancelled" || booking.status === "rejected"
                   ? "bg-red-100 text-red-700"

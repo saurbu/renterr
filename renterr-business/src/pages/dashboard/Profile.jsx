@@ -1,10 +1,13 @@
 import React from "react";
-import { ShieldCheck, Mail, Phone, CreditCard, UserRound, Pencil } from "lucide-react";
+import { ShieldCheck, Mail, Phone, CreditCard, UserRound, Pencil, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate()
   const storedUser = JSON.parse(
     localStorage.getItem("user") || "null"
-  );
+  )
+
 
     const profileImg = storedUser?.profileImage?.data
     ? `data:${storedUser.profileImage.contentType};base64,${storedUser.profileImage.data}`
@@ -13,7 +16,12 @@ const Profile = () => {
     const idProofImage = storedUser?.idProofImage?.data
     ? `data:${storedUser.idProofImage.contentType};base64,${storedUser.idProofImage.data}`
     : "https://via.placeholder.com/40"
+    const handleLogout = () => {
+      localStorage.removeItem("token")
+      localStorage.removeItem("user")
 
+      navigate("/login", { replace: true })
+    }
   return (
     <div className="w-full  p-4 mb-5">
       <div className="bg-white rounded-2xl  p-5 mb-5">
@@ -35,7 +43,15 @@ const Profile = () => {
                 Verified Profile
               </div>
           </div>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 p-3 md:hidden text-white font-semibold bg-red-600 rounded-xl mb-1"
+          >
+            <LogOut size={20}/>
+            Logout
+          </button>
         </div>
+        
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0_0_10px_rgba(0,0,0,0.3)] p-5 mb-5">
@@ -124,3 +140,4 @@ const Profile = () => {
 };
 
 export default Profile;
+ 

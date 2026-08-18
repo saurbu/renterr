@@ -22,7 +22,7 @@ const Navbar = ({login, setlogin , sideOpen, setSideOpen}) => {
   
   const logout = () => {
     localStorage.removeItem('loggedInUser')
-    localStorage.removeItem('token')
+    localStorage.removeItem('token') 
     setlogin(false)
   }
   

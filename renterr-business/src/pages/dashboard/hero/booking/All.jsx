@@ -38,7 +38,7 @@ const All = () => {
     }
 
     fetchBookings()
-  })
+  },[])
   
   const updateStatus = async (newStatus) => {
     if(
@@ -61,10 +61,18 @@ const All = () => {
         }
       )
 
-      if (res.data.success) {
-        setStatus(res.data.booking.status)
-        setStatusBookingId(null)
-      }
+      setBookings((prev) =>
+        prev.map((booking) =>
+          booking._id === bookingId
+            ? {
+                ...booking,
+                status: newStatus
+              }
+            : booking
+        )
+      )
+
+      setStatusBookingId(null)
     } catch (err) {
       console.log(err)
     }

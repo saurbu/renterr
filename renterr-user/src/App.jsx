@@ -6,12 +6,30 @@ import Bookings from "./pages/Bookings";
 import Booking from "./pages/Booking";
 import Profile from "./pages/Profile";
 import DashboardLayout from "./components/DashboardLayout";
+// import axios from "axios";
 
 const App = () => {
   const [isLogin , setIsLogin] = useState(false)
   const [sideOpen, setSideOpen] =useState(true)
-
-
+  const [bookCar, setBookCar] = useState(null)
+  // const [cars, setCars] = useState([])
+  
+  //   useEffect(() =>{
+  //     const fetchCars = async () =>{
+  //       try{
+  //         const res = await axios.get(
+  //           "http://localhost:8000/api/car/allcars")
+  //         if(res.data.success){
+  //           const cardtl = res.data.cars.filter((item) => item._id === bookCar)
+  //           setCars(cardtl)
+            
+  //         }
+  //       }catch(err){
+  //         console.log(err)
+  //       }
+  //     }
+  //     fetchCars()
+  //   }, [bookCar])
 
   useEffect(()=>{
     const user = localStorage.getItem("loggedInUser")
@@ -24,11 +42,11 @@ const App = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/login" element={<Login />} />
       {/* Dashboard Layout */}
-      <Route path="/" element={<DashboardLayout login={isLogin} setlogin={setIsLogin} sideOpen={sideOpen} setSideOpen={setSideOpen}/>}>
-        <Route path="home" element={<Home login={isLogin} setlogin={setIsLogin} sideOpen={sideOpen} setSideOpen={setSideOpen}/>} />
-        <Route path="bookings" element={<Bookings />} />
-        <Route path="bookcar" element={<Booking />} />
-        <Route path="profile" element={<Profile />} />
+      <Route path="/" element={<DashboardLayout login={isLogin} setlogin={setIsLogin} sideOpen={sideOpen} setSideOpen={setSideOpen} bookCar={bookCar} setBookCar={setBookCar}/>}>
+        <Route path="home" element={<Home login={isLogin} setlogin={setIsLogin} sideOpen={sideOpen} setSideOpen={setSideOpen} bookCar={bookCar} setBookCar={setBookCar}/>} />
+        <Route path="bookings" element={<Bookings bookCar={bookCar} setBookCar={setBookCar}/>} />
+        <Route path="bookcar" element={<Booking bookCar={bookCar} setBookCar={setBookCar}/>} />
+        <Route path="profile" element={<Profile login={isLogin} setlogin={setIsLogin}/>} />
       </Route>
     </Routes>
   );

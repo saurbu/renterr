@@ -1,18 +1,19 @@
 import axios from 'axios'
 import React from 'react'
+import { TriangleAlert } from 'lucide-react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-const Bookings = ({onBack}) => {
+const Booking = ({bookCar, setBookCar}) => {
   const [cars, setCars] = useState([])
   const [view, setView] = useState(null)
+  const [image, setImage] = useState("")
   const [formData, setFormData] = useState({
       date: "",
       days: "",
       totalAmount: ""
     })
-
-
+    
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,35 +24,36 @@ const Bookings = ({onBack}) => {
       e.preventDefault();
       try{
         const token = localStorage.getItem("token")
-        const data = new FormData()
-  
-        data.append("brand", formData.brand)
-        data.append("model", formData.model)
-        data.append("totalAmount", formData.pricePerDay)
-  
+        const selectedCar = cars[0]   
+        const total = selectedCar.pricePerDay * Number(formData.days)
+        
         const res = await axios.post(
           "http://localhost:8000/api/user/bookcar",
           {
+            carId: bookCar,
+            date: formData.date,
+            days: Number(formData.days),
+            totalAmount: total
+          },
+          {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            body: data,
+              Authorization: `Bearer ${token}`
+            }
           }
-        );
-  
-        const result = await res.json();
-  
-        if (result.success) {
+        )
+
+        if(res.data.success) {
     
           setFormData({
             date: "",
             days: "",
             totalAmount: ""
           })
+          setView(false)
   
-          onBack()
         } else {
-          alert(result.message || "Failed to add car");
+          console.log("booking failed");
+          
         }
           }catch (error) {
             console.log(error);
@@ -65,8 +67,11 @@ const Bookings = ({onBack}) => {
         const res = await axios.get(
           "http://localhost:8000/api/car/allcars")
         if(res.data.success){
-          const notBooked = res.data.cars.filter((item) => item.isBooked === false)
-          setCars(notBooked)
+          const selectCar = res.data.cars.filter((item) => item._id === bookCar)
+          setCars(selectCar)
+          if (selectCar.length > 0 && selectCar[0].images?.length > 0) {
+            setImage(selectCar[0].images[0])
+          }
           
         }
       }catch(err){
@@ -74,12 +79,104 @@ const Bookings = ({onBack}) => {
       }
     }
     fetchCars()
-  }, [])
+  }, [bookCar])
 
   return (
     <div>
       <div>
+        {cars.map((car) => (
+          <div
+          key={car._id}
+          className='p-5'
+          >
+            <div className='grid md:grid-cols-5'>
+              <div className='col-span-3'>
+                <img
+                loading='lazy'
+                src={image}
+                alt={car.brand}
+                className="md:w-full  md:h-[60vh] h-50 w-full object-cover rounded-3xl transition-all duration-500"
+                />
+                <div className="flex md:gap-3 gap-1 mt-4 overflow-x-auto">
+                  {car.images?.map((img, index) => (
+                    <img
+                    loading='lazy'
+                    src={img}
+                    key={index}
+                    alt={`${car.brand}-${index}`}
+                    onClick={()=> setImage(img)}
+                    className={`w-20 h-16 object-cover rounded-lg cursor-pointer border-2 ${
+                      image === img
+                        ? "border-indigo-950"
+                        : "border-transparent"
+                    }`}
+                    />
+                  ))}
+                </div>
+                
+              </div>
+                  <div 
+                  className="md:p-5 md:px-10 col-span-2">
+                    <h2 className="capitalize md:text-3xl text-2xl font-bold">
+                      {car.brand}, {car.model}
+                    </h2>
 
+                    <div className="text-[18px] md:space-y-1 text-gray-600">
+                      <p>
+                        {car.gearType} • {car.engineType}
+                      </p>
+                      <p>
+                        {car.seats} Seats
+                      </p>
+                    </div>
+
+                    <div className=" ">
+                      <h3 className="text-3xl font-bold text-red-600">
+                        ₹{car.pricePerDay}
+                        <span className="text-sm text-gray-500">
+                          /day
+                        </span>
+                      </h3>
+
+                    </div>
+                    <div className="my-3 h-fit rounded-2xl bg-amber-50 p-4 shadow-[0_0_10px_rgba(0,0,0,0.3)] shadow-amber-700">
+                      <p className="flex items-center gap-2 text-xl font-semibold text-amber-500">
+                        <TriangleAlert size={20} />
+                        Note
+                      </p>
+
+                      <div className="mt-2 space-y-1 text-sm md:text-base text-gray-700">
+                        <p>
+                          • Take pictures of the car from all angles, including the interior,
+                          before pickup.
+                        </p>
+
+                        <p>
+                          • If you find any dents, scratches, or other issues with the car,
+                          inform the dealer before pickup.
+                        </p>
+
+                        <p>
+                          • Carry the required vehicle documents during pickup, such as the
+                          Pollution Certificate, Insurance, RC, and Driving License.
+                        </p>
+
+                        <p>
+                          • Only the person who made the booking can pick up the car and must
+                          provide the original ID proof for verification. The car will not be
+                          handed over to anyone else.
+                        </p>
+                      </div>
+                    </div>
+                    <button 
+                      onClick={()=> setView(true)}
+                      className="px-4 py-2 w-full rounded-3xl  bg-indigo-950 cursor-pointer text-white  hover:bg-indigo-900">
+                        Book Now
+                      </button>
+                  </div>
+              </div>
+          </div>
+        ))}
       </div>
       {view && (
 
@@ -112,11 +209,13 @@ const Bookings = ({onBack}) => {
 
                   <input
                     type="text"
-                    name="pricePerDay"
+                    name="totalAmount"
                     disabled
-                    value={formData.totalAmount}
+                    value={cars[0]
+                    ? cars[0].pricePerDay * Number(formData.days || 0)
+                    : ""}
                     onChange={handleChange}
-                    placeholder="totalAmount"
+                    placeholder="Total Amount"
                     className="border p-3 rounded-lg"
                     required
                   />
@@ -147,4 +246,4 @@ const Bookings = ({onBack}) => {
   )
 }
 
-export default Bookings
+export default Booking

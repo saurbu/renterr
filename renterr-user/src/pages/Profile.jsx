@@ -1,11 +1,15 @@
 import React from "react";
-import { ShieldCheck, Mail, Phone, CreditCard, UserRound, Pencil } from "lucide-react";
+import { ShieldCheck, Mail, Phone, CreditCard, UserRound, Pencil, LogOut } from "lucide-react";
 
-const Profile = () => {
+const Profile = ({login,setlogin}) => {
   const storedUser = JSON.parse(
     localStorage.getItem("loggedInUser") || "null"
-  );
-
+  )
+  const logout = () => {
+    localStorage.removeItem('loggedInUser')
+    localStorage.removeItem('token')
+    setlogin(false)
+  }
   return (
     <div className="w-full  p-4 mb-5">
       {}
@@ -23,6 +27,7 @@ const Profile = () => {
                 Verified Profile
               </div>
           </div>
+          
         </div>
       </div>
 
@@ -76,11 +81,11 @@ const Profile = () => {
         <div className="flex flex-col md:flex-row gap-5">
 
           <div className="w-full md:w-72 h-44 rounded-xl overflow-hidden border bg-gray-100">
-            {storedUser?.idProofImage ? (
+            {storedUser?.licencePhoto ? (
               <img
                 src={storedUser.licencePhoto}
                 alt="licensePhoto"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-fit"
               />
             ) : (
               <div className="h-full flex items-center justify-center text-gray-400">
@@ -105,6 +110,15 @@ const Profile = () => {
           </div>
 
         </div>
+        {
+            login && (
+              <div className='w-full flex justify-center'>
+            <button 
+            onClick={()=> logout()}
+            className='flex gap-2 w-fit font-semibold text-white md:hidden bg-red-600 p-1 px-2 mt-3 rounded'><LogOut /> Logout</button>
+          </div>
+            )
+          }
       </div>
 
     </div>
