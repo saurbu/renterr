@@ -90,9 +90,9 @@ const Login = () => {
         <img
           src={logo}
           alt="Logo"
-          className="w-40 mx-auto mb-8 cursor-pointer"
+          className="w-40 mx-auto  cursor-pointer"
         />
-
+        <p className="py-4 text-2xl font-semibold">Login as a Dealer</p>
         <form className="space-y-5" onSubmit={handleLogin}>
           <input
             onChange={handleChange}
@@ -126,12 +126,15 @@ const Login = () => {
           ---------------- Or ----------------
         </p>
 
-        <p className="text-center">
+        <p className="text-center ">
           Don't have an account?
           <br />
           <Link to="/signup" className="text-blue-700 font-semibold">
             Signup
           </Link>
+          <br />
+          
+        <a href="https://renterr-user.vercel.app/home" className="text-blue-600 font-semibold" action="_blank">Booking Portal</a>
         </p>
       </div>
 
