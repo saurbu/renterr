@@ -1,5 +1,5 @@
 import User from "../Models/User.js";
-import imagekit from "../config/imagekit.js";
+import imagekit from "../config/imageKit.js";
 
 export const profileComplete = async (req, res) => {
     try {
