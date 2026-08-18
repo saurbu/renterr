@@ -12,9 +12,9 @@ import Bookings from "./pages/dashboard/Bookings";
 import Profile from "./pages/dashboard/Profile";
 import Earning from "./pages/dashboard/Earning";
 import All from "./pages/dashboard/hero/booking/All";
-import Pending from "./pages/dashboard/hero/booking/pending";
-import Completed from "./pages/dashboard/hero/booking/completed";
-import Cancel from "./pages/dashboard/hero/booking/cancel";
+import Pending from "./pages/dashboard/hero/booking/Pending";
+import Completed from "./pages/dashboard/hero/booking/Completed";
+import Cancel from "./pages/dashboard/hero/booking/Cancel";
 import Approved from "./pages/dashboard/hero/booking/Approved";
 import axios from "axios";
 
