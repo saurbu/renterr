@@ -31,7 +31,7 @@ const Complete = () => {
       formData.append("number", cmpData.number)
       formData.append("licenceNumber", cmpData.licenceNumber)
       formData.append("licencePhoto", cmpData.licencePhoto)
-      const res = await axios.put("http://localhost:8000/api/user/profilecomplete",
+      const res = await axios.put("https://renterr.onrender.com/api/user/profilecomplete",
         formData,
         {
           headers: {

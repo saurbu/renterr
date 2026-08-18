@@ -13,7 +13,7 @@ const Home = ({earning, totalErn}) => {
 
         if (!token) return;
 
-        const res = await fetch("http://localhost:8000/api/auth/profile", {
+        const res = await fetch("https://renterr.onrender.com/api/auth/profile", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

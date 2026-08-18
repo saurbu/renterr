@@ -62,7 +62,7 @@ const AddCar = ({ onBack }) => {
       })
 
       const res = await fetch(
-        "http://localhost:8000/api/car/addCar",
+        "https://renterr.onrender.com/api/car/addCar",
         {
           method: "POST",
           headers: {

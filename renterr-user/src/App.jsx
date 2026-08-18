@@ -18,7 +18,7 @@ const App = () => {
   //     const fetchCars = async () =>{
   //       try{
   //         const res = await axios.get(
-  //           "http://localhost:8000/api/car/allcars")
+  //           "https://renterr.onrender.com/api/car/allcars")
   //         if(res.data.success){
   //           const cardtl = res.data.cars.filter((item) => item._id === bookCar)
   //           setCars(cardtl)

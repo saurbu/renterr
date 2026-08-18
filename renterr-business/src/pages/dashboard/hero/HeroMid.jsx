@@ -15,7 +15,7 @@ const HeroMid = ({totalErn}) => {
 
         if (!token) return;
 
-        const res = await axios.get("http://localhost:8000/api/car/mycars", {
+        const res = await axios.get("https://renterr.onrender.com/api/car/mycars", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -35,7 +35,7 @@ const HeroMid = ({totalErn}) => {
 
         if (!token) return;
 
-        const res = await axios.get("http://localhost:8000/api/car/bookings", {
+        const res = await axios.get("https://renterr.onrender.com/api/car/bookings", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

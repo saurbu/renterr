@@ -29,15 +29,15 @@ const startServer = async () => {
       try{
         await endBooking()
       }catch(err){
-        console.log("Error checking expired bookings:", err);
+        console.log("Error checking expired bookings:", err)
         
       }
     })
     app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+      console.log(`Server is running on port ${PORT}`)
     });
   } catch (error) {
-    console.error("Server startup failed:", error);
+    console.error("Server startup failed:", error)
     process.exit(1);
   }
 };

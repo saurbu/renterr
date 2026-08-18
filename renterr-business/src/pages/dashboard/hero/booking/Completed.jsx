@@ -11,7 +11,7 @@ const Completed = () => {
 
         const token = localStorage.getItem('token')
         const res = await axios.get(
-          "http://localhost:8000/api/car/bookings",
+          "https://renterr.onrender.com/api/car/bookings",
           {
             headers: {
               Authorization:`Bearer ${token}`

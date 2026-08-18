@@ -62,7 +62,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const url = "http://localhost:8000/api/auth/signup";
+      const url = "https://renterr.onrender.com/api/auth/signup";
       if (
         !verificationInfo.name ||
         !verificationInfo.idType ||

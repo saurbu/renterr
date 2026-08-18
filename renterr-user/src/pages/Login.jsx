@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault()
 
     try{
-      const res = await axios.post("http://localhost:8000/api/auth/sendOtp", {
+      const res = await axios.post("https://renterr.onrender.com/api/auth/sendOtp", {
         email: sendOTP.email
       })
 
@@ -57,7 +57,7 @@ const Login = () => {
     e.preventDefault()
 
     try{
-      const res = await axios.post("http://localhost:8000/api/auth/sendOtp", {
+      const res = await axios.post("https://renterr.onrender.com/api/auth/sendOtp", {
         email: verifyOTP.email
       })
 
@@ -79,7 +79,7 @@ const Login = () => {
     try{
 
       const enteredotp = otp.join("")
-      const res = await axios.post("http://localhost:8000/api/auth/verifyOtp", {
+      const res = await axios.post("https://renterr.onrender.com/api/auth/verifyOtp", {
         email: verifyOTP.email,
         otp: enteredotp
       })

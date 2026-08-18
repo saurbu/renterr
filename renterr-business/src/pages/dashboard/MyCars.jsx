@@ -14,7 +14,7 @@ const MyCars = () => {
       const token = localStorage.getItem("token")
 
       const res = await axios.get(
-        "http://localhost:8000/api/car/mycars",
+        "https://renterr.onrender.com/api/car/mycars",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const MyCars = () => {
     try{
       const token = localStorage.getItem('token')
 
-      const res = await axios.delete(`http://localhost:8000/api/car/mycars/${deleteCars}`,
+      const res = await axios.delete(`https://renterr.onrender.com/api/car/mycars/${deleteCars}`,
         {
           headers:{
             Authorization : `Bearer ${token}`

@@ -28,7 +28,7 @@ const Booking = ({bookCar, setBookCar}) => {
         const total = selectedCar.pricePerDay * Number(formData.days)
         
         const res = await axios.post(
-          "http://localhost:8000/api/user/bookcar",
+          "https://renterr.onrender.com/api/user/bookcar",
           {
             carId: bookCar,
             date: formData.date,
@@ -65,7 +65,7 @@ const Booking = ({bookCar, setBookCar}) => {
     const fetchCars = async () =>{
       try{
         const res = await axios.get(
-          "http://localhost:8000/api/car/allcars")
+          "https://renterr.onrender.com/api/car/allcars")
         if(res.data.success){
           const selectCar = res.data.cars.filter((item) => item._id === bookCar)
           setCars(selectCar)

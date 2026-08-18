@@ -25,7 +25,7 @@ const Bookings = () => {
 
       const token = localStorage.getItem('token')
       const res = await axios.patch(
-        `http://localhost:8000/api/car/bookings/${bookingId}/status`,
+        `https://renterr.onrender.com/api/car/bookings/${bookingId}/status`,
         {
           status: newStatus
         },
@@ -59,7 +59,7 @@ const Bookings = () => {
   
           const token = localStorage.getItem('token')
           const res = await axios.get(
-            "http://localhost:8000/api/car/mybookings",
+            "https://renterr.onrender.com/api/car/mybookings",
             {
               headers: {
                 Authorization:`Bearer ${token}`
