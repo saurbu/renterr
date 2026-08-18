@@ -193,6 +193,13 @@ const Navbar = ({login, setlogin , sideOpen, setSideOpen}) => {
             </NavLink>
           ))
         }
+        <NavLink
+              to={"/helpcenter"}
+              className={({ isActive }) =>`flex items-center gap-3 p-2 text-white rounded-xl mb-1 transition-all duration-300 
+              ${isActive ? "bg-red-700" : ""}`}
+            >
+            <Headset />
+            </NavLink>
       </div>
     </div>
   )

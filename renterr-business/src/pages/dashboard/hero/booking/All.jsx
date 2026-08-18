@@ -11,9 +11,9 @@ const All = () => {
 
   const handleStaus= (e)=> {
     const newstatus = e.currentTarget.dataset.value
-    setStatus(newstatus)
-    updateStatus(newstatus)
-  }
+      setStatus(newstatus)
+      updateStatus(newstatus)
+    }
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -34,7 +34,7 @@ const All = () => {
         }
       } catch (err) {
         console.log(err)
-      }
+      } 
     }
 
     fetchBookings()

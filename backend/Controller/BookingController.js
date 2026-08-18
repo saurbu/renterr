@@ -330,4 +330,24 @@ export const allBookings = async (req, res) => {
             error: err.message
         })
     }
+} 
+
+export const mybookings = async (req, res) => {
+    try {
+        const bookings = await Booking.find({
+            user: req.user.userId
+        }).sort({createdAt: -1})
+        res.status(200).json({
+            message: "All bookings",
+            success: true,
+            bookings
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Bookings not found",
+            success: false,
+            error: err.message
+        })
+    }
 }

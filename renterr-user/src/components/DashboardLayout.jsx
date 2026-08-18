@@ -4,7 +4,7 @@ import Navbar from "./leftcard/Navbar";
 const DashboardLayout = ({login , setlogin,  sideOpen, setSideOpen,bookCar, setBookCar}) => {
 
   return (
-    <div className="w-full bg-amber-50 md:flex md:gap-6 md:h-screen md:overflow-hidden">
+    <div className="w-full bg-amber-50 md:flex md:gap-6 md:h-screen md:overflow-hidden select-none">
       <Navbar login={login} setlogin={setlogin} sideOpen={sideOpen} setSideOpen={setSideOpen} />
 
       <main className="w-full min-w-0 md:flex-1 md:p-4 md:ml-0">

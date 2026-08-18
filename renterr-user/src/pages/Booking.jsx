@@ -182,6 +182,7 @@ const Booking = ({bookCar, setBookCar}) => {
 
         <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
           <div className="w-full max-w-md rounded-2xl bg-white shadow-2xl border border-gray-200 p-6 sm:p-8 text-center">
+              <p className='font-semibold text-2xl'>Fill the details</p>
             <div className="mt-7 flex flex-col-reverse sm:flex-row gap-3 justify-center">
               <form
                 onSubmit={handleSubmit}

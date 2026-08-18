@@ -69,11 +69,11 @@ const MyCars = () => {
       </h1>
 
       <div 
-      className="grid md:grid-cols-3 lg:grid-cols-3 grid-cols-2 gap-6 overflow-x-auto scrollbar-none">
+      className="grid md:grid-cols-3 mb-8 lg:grid-cols-3 grid-cols-2 mt-10 md:mb-1 gap-6 overflow-x-auto scrollbar-none">
         {cars.map((car) => (
           <div
           key={cars._id}
-            className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:-translate-y-1 transition-all duration-300">
+            className="bg-white rounded-2xl border justify-between flex flex-col  border-gray-200 overflow-hidden hover:-translate-y-1 transition-all duration-300">
             <img
               loading='lazy'
               src={car.images?.[0]}
@@ -102,13 +102,13 @@ const MyCars = () => {
                   </span>
                 </h3>
 
+                </div>
+            </div>
                 <button 
                 onClick={()=> setDeleteCars(car._id)}
-                className="px-4 py-2  bg-indigo-950 cursor-pointer text-white rounded-xl hover:bg-indigo-900">
+                className=" py-2 w-full bg-indigo-950 cursor-pointer text-white  hover:bg-indigo-900">
                   Remove Car
                 </button>
-              </div>
-            </div>
           </div>
         ))}
       </div>

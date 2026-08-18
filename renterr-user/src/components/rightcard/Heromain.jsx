@@ -51,15 +51,12 @@ const HeroMain = ({bookCar, setBookCar}) => {
                 </p>
               </div>
 
-              <div className=" flex flex-row flex-wrap md:justify-between justify-center items-center ">
                 <h3 className="text-2xl font-bold text-red-600">
                   ₹{car.pricePerDay}
                   <span className="text-sm text-gray-500">
                     /day
                   </span>
                 </h3>
-
-              </div>
             </div>
                 <button 
                 onClick={()=>{ 
