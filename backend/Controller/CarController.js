@@ -1,6 +1,6 @@
 import Car from '../Models/CarModal.js'
 import User from '../Models/Admin.js'
-import imagekit from "../config/imagekit.js"
+import imagekit from "../config/imageKit.js"
 
 export const addCar = async (req,res) =>{
     try{
