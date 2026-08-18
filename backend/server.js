@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/car", carRoutes);
-app.use("/api/auth", authRouter)
+app.use("/api/auth", AuthRouter)
 app.use("/api/user", userRouter)
 
 const startServer = async () => {
