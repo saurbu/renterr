@@ -1,10 +1,12 @@
 import React from "react";
-import { ShieldCheck, Mail, Phone, CreditCard, UserRound, Pencil, LogOut } from "lucide-react";
+import { ShieldCheck, Mail, Phone, CreditCard, UserRound, Pencil, LogOut, LogIn } from "lucide-react";
+import {useNavigate} from 'react-router-dom'
 
 const Profile = ({login,setlogin}) => {
   const storedUser = JSON.parse(
     localStorage.getItem("loggedInUser") || "null"
   )
+  const navigate = useNavigate()
   const logout = () => {
     localStorage.removeItem('loggedInUser')
     localStorage.removeItem('token')
@@ -19,13 +21,22 @@ const Profile = ({login,setlogin}) => {
             <h1 className="text-2xl font-bold text-indigo-950">
               {storedUser?.name || "User"}
             </h1>
-            <p className="text-gray-500 mt-1">
+            <p className="text-gray-500 mt-1 hidden md:block">
               {storedUser?.email || "No email available"}
             </p>
-              <div className="flex justify-center sm:justify-start items-center gap-1 mt-2 text-green-600 font-semibold text-sm">
-                <ShieldCheck size={18} />
-                Verified Profile
-              </div>
+            {
+            !login && (
+              <div className='w-full flex md:hidden justify-center'>
+            <button 
+            onClick={()=> navigate('/login')}
+            className='flex gap-2 w-fit font-semibold text-white md:hidden bg-red-600 p-1 px-2 mt-3 rounded'><LogIn /> Login</button>
+          </div>
+            )
+          }
+          <div className="flex justify-center sm:justify-start items-center gap-1 mt-2 text-green-600 font-semibold text-sm">
+            <ShieldCheck size={18} />
+            Verified Profile
+            </div>
           </div>
           
         </div>
