@@ -190,7 +190,7 @@ const Bookings = () => {
           ))
           ) :(
             <div className='w-full h-full flex justify-center pt-[30vh] col-span-2 md:col-span-3'>
-              No Bookings, Book a Car
+              No Bookings, Book a new Car
             </div>
           )
         }
