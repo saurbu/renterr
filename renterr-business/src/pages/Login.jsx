@@ -134,7 +134,7 @@ const Login = () => {
           </Link>
           <br />
           
-        <a href="https://renterr-user.vercel.app/home" className="text-blue-600 font-semibold" action="_blank">Booking Portal</a>
+        <a href="https://renterr-user.vercel.app/" className="text-blue-600 font-semibold" action="_blank">Booking Portal</a>
         </p>
       </div>
 
