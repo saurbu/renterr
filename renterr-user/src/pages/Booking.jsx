@@ -1,13 +1,15 @@
 import axios from 'axios'
 import React from 'react'
-import { TriangleAlert } from 'lucide-react'
+import { TriangleAlert, LogIn } from 'lucide-react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const Booking = ({bookCar, setBookCar}) => {
+const Booking = ({bookCar, login}) => {
   const [cars, setCars] = useState([])
   const [view, setView] = useState(null)
   const [image, setImage] = useState("")
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
       date: "",
       days: "",
@@ -230,13 +232,19 @@ const Booking = ({bookCar, setBookCar}) => {
                   >
                     Cancel
                   </button>
-
-                  <button
-                    type="submit"
-                    className="px-6 py-3 rounded-lg bg-red-500 text-white cursor-pointer"
-                  >
-                    Book Car
-                  </button>
+                      
+                  {login? (
+                    <button
+                      type="submit"
+                      className="px-6 py-3 rounded-lg bg-red-500 text-white cursor-pointer"
+                    >
+                      Book Car
+                    </button>
+                  ): (
+                    <button 
+                    onClick={()=> navigate('/login')}
+                    className='flex gap-2 px-4 py-3 rounded-lg bg-red-500 text-white cursor-pointer'><LogIn /> Login</button>
+                  )}
                 </div>
               </form>
             </div>

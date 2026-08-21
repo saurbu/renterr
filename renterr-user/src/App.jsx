@@ -45,7 +45,7 @@ const App = () => {
       <Route path="/" element={<DashboardLayout login={isLogin} setlogin={setIsLogin} sideOpen={sideOpen} setSideOpen={setSideOpen} bookCar={bookCar} setBookCar={setBookCar}/>}>
         <Route path="home" element={<Home login={isLogin} setlogin={setIsLogin} sideOpen={sideOpen} setSideOpen={setSideOpen} bookCar={bookCar} setBookCar={setBookCar}/>} />
         <Route path="bookings" element={<Bookings bookCar={bookCar} setBookCar={setBookCar}/>} />
-        <Route path="bookcar" element={<Booking bookCar={bookCar} setBookCar={setBookCar}/>} />
+        <Route path="bookcar" element={<Booking bookCar={bookCar} setBookCar={setBookCar} login={isLogin}/>} />
         <Route path="profile" element={<Profile login={isLogin} setlogin={setIsLogin}/>} />
       </Route>
     </Routes>
