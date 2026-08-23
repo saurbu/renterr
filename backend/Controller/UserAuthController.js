@@ -115,6 +115,7 @@ export const sendOtp = async (req, res) => {
     })
   }
 }
+
 export const verifyOTP = async (req, res) =>{
     try{
         const { email, otp }= req.body 
