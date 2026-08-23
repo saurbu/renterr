@@ -33,21 +33,6 @@ const Login = () => {
   const handleSendOtp = async (e) => {
     e.preventDefault()
     setSendingOtp(true)
-    console.log("🔥 HANDLE SEND OTP CALLED")
-  console.log("Email:", sendOTP.email)
-  console.log("🚀 About to call Render API")
-
-const res = await axios.post(
-  "https://renterr.onrender.com/api/auth/sendOtp",
-  {
-    email: sendOTP.email,
-  },
-  {
-    timeout: 30000,
-  }
-)
-
-console.log("✅ Render response:", res.data)
     try{
       const res = await axios.post("https://renterr.onrender.com/api/auth/sendOtp", {
         email: sendOTP.email

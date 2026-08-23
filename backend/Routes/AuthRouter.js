@@ -43,6 +43,6 @@ router.get(
 );
 
 
-router.post('/sendotp',sendOtp)
-router.post('/verifyotp', verifyOTP)
+router.post('/sendOtp',sendOtp)
+router.post('/verifyOtp', verifyOTP)
 export default router;
