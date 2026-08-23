@@ -14,7 +14,41 @@ const app = express();
 
 const PORT = process.env.PORT || 8000;
 
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://YOUR-USER-FRONTEND.vercel.app",
+  "https://YOUR-SELLER-FRONTEND.vercel.app",
+]
+
+app.use(cors({
+  origin: function (origin, callback) {
+
+    // Allow Postman / server-to-server requests
+    if (!origin) {
+      return callback(null, true)
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+
+    console.log("❌ CORS blocked:", origin)
+
+    return callback(
+      new Error("Not allowed by CORS")
+    )
+  },
+
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+  ],
+
+  credentials: true,
+}))
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(
