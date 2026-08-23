@@ -10,6 +10,7 @@ const Login = () => {
   const [count, setCount] = useState(30)
   const [resend, setResend] = useState(false)
   const [step, setStep] = useState("login")
+  const [sendingOtp, setSendingOtp] = useState(false)
   const [sendOTP, setSendOTP] = useState({
     email:""
   })
@@ -31,10 +32,27 @@ const Login = () => {
 
   const handleSendOtp = async (e) => {
     e.preventDefault()
+    setSendingOtp(true)
+    console.log("🔥 HANDLE SEND OTP CALLED")
+  console.log("Email:", sendOTP.email)
+  console.log("🚀 About to call Render API")
 
+const res = await axios.post(
+  "https://renterr.onrender.com/api/auth/sendOtp",
+  {
+    email: sendOTP.email,
+  },
+  {
+    timeout: 30000,
+  }
+)
+
+console.log("✅ Render response:", res.data)
     try{
       const res = await axios.post("https://renterr.onrender.com/api/auth/sendOtp", {
         email: sendOTP.email
+      },{
+        timeout: 30000,
       })
 
       if(res.data.success){
@@ -159,14 +177,39 @@ const Login = () => {
                 className='bg-indigo-950/30 w-full h-10 rounded-xl px-2 outline-none focus:border-2 flex items-center border-indigo-950'
                 />
                 {!otpsend ? (
-                  <button 
-                  className='flex bg-blue-600 hover:bg-blue-700 w-full p-2 rounded-xl cursor-pointer font-semibold gap-1 text-white justify-center items-center'
-                  ><Send size={22}/>Send OTP</button>
-                ):(
-                  <button 
-                  disabled
-                  className='flex bg-green-600 w-full p-2 rounded-xl cursor-pointer font-semibold gap-1 text-white justify-center items-center'
-                  ><Send size={22}/>OTP Sent</button>
+
+                  <button
+                    type="submit"
+                    disabled={sendingOtp}
+                    className={`flex w-full p-2 rounded-xl font-semibold gap-1 text-white justify-center items-center ${
+                      sendingOtp
+                        ? "bg-blue-400 cursor-not-allowed"
+                        : "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                    }`}
+                  >
+
+                    <Send size={22} />
+
+                    {sendingOtp
+                      ? "Sending..."
+                      : "Send OTP"}
+
+                  </button>
+
+                ) : (
+
+                  <button
+                    type="button"
+                    disabled
+                    className="flex bg-green-600 w-full p-2 rounded-xl cursor-not-allowed font-semibold gap-1 text-white justify-center items-center"
+                  >
+
+                    <Send size={22} />
+
+                    OTP Sent
+
+                  </button>
+
                 )}
                   <p className='text-center py-3 hidden md:block'>---------------- OR ----------------</p>
               </form>

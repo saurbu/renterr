@@ -20,7 +20,12 @@ app.use(express.json());
 app.use("/api/car", carRoutes);
 app.use("/api/auth", AuthRouter)
 app.use("/api/user", userRouter)
-
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Renterr backend is working",
+  })
+})
 const startServer = async () => {
 
   try {
@@ -33,6 +38,7 @@ const startServer = async () => {
         
       }
     })
+
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     });
