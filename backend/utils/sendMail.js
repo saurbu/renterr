@@ -19,15 +19,6 @@ const transporter = nodemailer.createTransport({
   socketTimeout: 15000,
 })
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ SMTP ERROR:")
-    console.error(error)
-  } else {
-    console.log("✅ SMTP SERVER READY")
-  }
-})
-
 const sendOTP = async (email, otp) => {
   try {
     console.log("Preparing OTP email...")
